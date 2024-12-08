@@ -155,12 +155,10 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"// Obtener el tiempo de respuesta de la solicitud\r",
-							"const responseTime = pm.response.responseTime;\r",
 							"\r",
 							"// Validar si el tiempo de respuesta es menor a 500ms\r",
 							"pm.test(\"Tiempo de respuesta menor a 500ms\", function () {\r",
-							"    pm.expect(responseTime).to.be.below(500);\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
 							"});"
 						],
 						"type": "text/javascript",
