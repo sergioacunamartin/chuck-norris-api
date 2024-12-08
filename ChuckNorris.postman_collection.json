@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "e75e34de-033f-469d-88e7-07a3b2817e48",
+		"name": "Chuck Norris",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39657676"
+	},
+	"item": [
+		{
+			"name": "Obtener una broma aleatoria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprobar que responde bien el servidor de la api\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Comprobar que la cadena \"Chuck Norris\" está presente en la clave valor\r",
+							"let nombre =\"Chuck Norris\";\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(`La cadena \"${nombre}\" está presente en el valor.`, function () {\r",
+							"        pm.expect(jsonData.value).to.include(nombre);\r",
+							" });"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.chucknorris.io/jokes/random",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chucknorris",
+						"io"
+					],
+					"path": [
+						"jokes",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obener la lista de categorías",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprobar que responde bien el servidor de la api\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verifica que la respuesta sea un array\r",
+							"pm.test(\"Comprobar que las categorías se devuelven como un array\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\"); \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.chucknorris.io/jokes/categories",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chucknorris",
+						"io"
+					],
+					"path": [
+						"jokes",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Broma de una categoría en concretro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprobar que responde bien el servidor de la api\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verifica que la categoría es animal\r",
+							"pm.test(\"La categoría es 'animal'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.categories).to.include(\"animal\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.chucknorris.io/jokes/random?category=animal",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chucknorris",
+						"io"
+					],
+					"path": [
+						"jokes",
+						"random"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "animal"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todas las bromas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprobar que responde bien el servidor de la api\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Obtener el tiempo de respuesta de la solicitud\r",
+							"const responseTime = pm.response.responseTime;\r",
+							"\r",
+							"// Validar si el tiempo de respuesta es menor a 500ms\r",
+							"pm.test(\"Tiempo de respuesta menor a 500ms\", function () {\r",
+							"    pm.expect(responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.chucknorris.io/jokes/search?query=Chuck Norris",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chucknorris",
+						"io"
+					],
+					"path": [
+						"jokes",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Chuck Norris"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
